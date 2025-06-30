@@ -14,14 +14,16 @@ if (isset($_GET['id'])) {
 
 
 ?>
-<section class="current-film">
-    <h2 class="current-film__title"><?= $currentFilm['titre'] ?></h2>
-    <h3 class="current-film__director"><?= $currentFilm['realisateur'] ?></h3>
-    <p class="current-film__year"><?= $currentFilm['annee'] ?></p>
-    <p class="current-film__genre"><?= $currentFilm['genre'] ?></p>
+<div class="current-film">
+    <h1 class="current-film__title"><?= $currentFilm['titre'] ?></h1>
+    <h2 class="current-film__director"><?= $currentFilm['realisateur'] ?></h2>
+    <div class="current-film__info">
+        <p class="current-film__year"><?= $currentFilm['annee'] ?></p>
+        <p class="current-film__genre"><?= $currentFilm['genre'] ?></p>
+    </div>
     <p class="current-film__summary"><?= $currentFilm['resume'] ?></p>
 
-</section>
+</div>
 
 
 <?php include 'includes/footer.php'; ?>

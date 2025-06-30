@@ -2,6 +2,12 @@
 <?php include 'includes/header.php'; ?>
 
 <?php
+$sqlGenre = "SELECT * FROM genres;";
+$stmtGenre = $pdo->prepare($sqlGenre);
+$stmtGenre->execute();
+$genres = $stmtGenre->fetchAll(PDO::FETCH_ASSOC);
+
+
 if (isset($_POST) && !empty($_POST)) {
     $errors = [];
 
@@ -73,32 +79,43 @@ if (isset($_POST) && !empty($_POST)) {
 
 
 ?>
+<h1>Ajouter un film</h1>
+<div class="add-form">
+    <form action="ajouter.php" method="POST">
+        <div class="form__questions">
+            <div class="form__item">
+                <label for="title">Titre : </label>
+                <input type="text" name="title" id="title">
+            </div>
 
-<form action="ajouter.php" method="POST">
-    <label for="title">Titre :</label>
-    <input type="text" name="title" id="title">
+            <div class="form__item">
+                <label for="director">Réalisateur : </label>
+                <input type="text" name="director" id="director">
+            </div>
 
-    <label for="director">Réalisateur :</label>
-    <input type="text" name="director" id="director">
+            <div class="form__item">
+                <label for="year">Année : </label>
+                <input type="number" name="year" id="year">
+            </div>
+            <div class="form__item">
+                <label for="genre">Genre : </label>
+                <select name="genre" id="genre">
+                    <option value="none"></option>
+                    <?php foreach ($genres as $genre) { ?>
+                        <option value="<?= $genre['id'] ?>"><?= $genre['nom'] ?></option>
 
-    <label for="year">Année</label>
-    <input type="number" name="year" id="year">
-
-    <select name="genre" id="genre">
-        <option value="none">Sélectionner un genre</option>
-        <option value="1">Action</option>
-        <option value="2">Comédie</option>
-        <option value="3">Drame</option>
-        <option value="4">Science-fiction</option>
-        <option value="5">Documentaire</option>
-    </select>
-
-    <label for="summary">Résumé : </label>
-    <textarea name="summary" id="summary"></textarea>
-
-    <input type="submit" value="Ajouter">
-
-</form>
+                    <?php } ?>
 
 
+                </select>
+            </div>
+            <div class="form__item"><label for="summary">Résumé : </label>
+                <textarea name="summary" id="summary"></textarea>
+            </div>
+        </div>
+        <input type="submit" value="Ajouter">
+
+    </form>
+
+</div>
 <?php include 'includes/footer.php'; ?>

@@ -65,8 +65,6 @@ if (isset($_POST['update'])) {
         ]);
         header("Location: ./index.php");
         exit;
-    } else {
-        echo "<pre>" . print_r($errors) . "</pre>";
     }
 }
 
@@ -109,39 +107,49 @@ if (isset($_GET['id'])) {
         $stmtGenreSelect = $pdo->prepare($sqlGenreSelect);
         $stmtGenreSelect->execute();
         $genres = $stmtGenreSelect->fetchAll(PDO::FETCH_ASSOC);
-    } else {
-        echo "<pre>" . print_r($errors) . "</pre>";
     }
 }
 
+if (!empty($errors)) {
+    echo "<pre>" . print_r($errors) . "</pre>";
+}
 
 ?>
+<h1>Modifier un film</h1>
+<div class="update-form">
+    <form action="modifier.php?id=<?= $currentFilm['id']; ?>" method="POST">
+        <input type="hidden" name="id" value="<?= $currentFilm['id']; ?>">
+        <div class="form__questions">
+            <div class="form__item">
+                <label for="title">Titre : </label>
+                <input type="text" name="title" id="title" value="<?= htmlspecialchars($currentFilm['titre']); ?>">
+            </div>
+            <div class="form__item">
+                <label for="director">Réalisateur : </label>
+                <input type="text" name="director" id="director" value="<?= htmlspecialchars($currentFilm['realisateur']); ?>">
+            </div>
+            <div class="form__item">
+                <label for="year">Année : </label>
+                <input type="number" name="year" id="year" value="<?= htmlspecialchars($currentFilm['annee']); ?>">
+            </div>
+            <div class="form__item">
+                <label for="genre">Genre : </label>
+                <select name="genre" id="genre">
+                    <option value="<?= htmlspecialchars($currentFilm['genre_id']); ?>"><?= htmlspecialchars($currentFilm['genre']); ?></option>
+                    <option value="none">Sélectionner un genre</option>
+                    <?php foreach ($genres as $genre) { ?>
+                        <option value="<?= $genre['id'] ?>"><?= $genre['nom'] ?></option>
+                    <?php } ?>
 
-<form action="modifier.php?id=<?= $currentFilm['id']; ?>" method="POST">
-    <input type="hidden" name="id" value="<?= $currentFilm['id']; ?>">
-    <label for="title">Titre :</label>
-    <input type="text" name="title" id="title" value="<?= htmlspecialchars($currentFilm['titre']); ?>">
+                </select>
+            </div>
+            <div class="form__item">
+                <label for="summary">Résumé : </label>
+                <textarea name="summary" id="summary"><?= htmlspecialchars($currentFilm['resume']); ?></textarea>
+            </div>
+        </div>
+        <input type="submit" name="update" value="Modifier">
 
-    <label for="director">Réalisateur :</label>
-    <input type="text" name="director" id="director" value="<?= htmlspecialchars($currentFilm['realisateur']); ?>">
-
-    <label for="year">Année</label>
-    <input type="number" name="year" id="year" value="<?= htmlspecialchars($currentFilm['annee']); ?>">
-
-    <select name="genre" id="genre">
-        <option value="<?= htmlspecialchars($currentFilm['genre_id']); ?>"><?= htmlspecialchars($currentFilm['genre']); ?></option>
-        <option value="none">Sélectionner un genre</option>
-        <?php foreach ($genres as $genre) { ?>
-            <option value="<?= $genre['id'] ?>"><?= $genre['nom'] ?></option>
-        <?php } ?>
-
-    </select>
-
-    <label for="summary">Résumé : </label>
-    <textarea name="summary" id="summary"><?= htmlspecialchars($currentFilm['resume']); ?></textarea>
-
-    <input type="submit" name="update" value="Modifier">
-
-</form>
-
+    </form>
+</div>
 <?php include 'includes/footer.php'; ?>
