@@ -3,12 +3,12 @@
 <?php
 if (isset($_GET['id'])) {
     $id = htmlspecialchars($_GET['id']);
-    $sql = "DELETE FROM films WHERE id = :id";
+    $sql = "DELETE FROM genres WHERE id = :id";
     $stmt = $pdo->prepare($sql);
     $stmt->execute([
         'id' => $id
     ]);
-    header("Location: ./index.php");
+    header("Location: genres.php");
     exit;
 }
 ?>
