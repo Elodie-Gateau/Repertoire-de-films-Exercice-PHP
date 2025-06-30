@@ -291,3 +291,52 @@ footer {
     justify-content: center;
     gap: 0;
 }
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}
+
+.confirm.message {
+    opacity: 1;
+    padding: 1rem;
+    text-align: center;
+    border-radius: 10px;
+    background-color: rgb(187, 240, 167);
+    border: 1px solid rgb(57, 185, 57);
+    display: inline-block;
+    animation: fadeIn 1s ease forwards, fadeOut 0.5s ease-out 4.5s forwards;
+}
+
+
+.err-message {
+    opacity: 1;
+    padding: 1rem;
+    text-align: center;
+    border-radius: 10px;
+    background-color: rgb(255, 207, 202);
+    border: 1px solid rgb(202, 59, 23);
+    display: inline-block;
+    animation: fadeIn 1s ease forwards
+}
+
+.error ul li {
+    list-style-type: none;
+    padding: 0.7rem;
+}

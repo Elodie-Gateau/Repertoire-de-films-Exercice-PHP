@@ -63,7 +63,7 @@ if (isset($_POST['update'])) {
             'summary' => $_POST['summary'],
             'id' => $_POST['id']
         ]);
-        header("Location: ./index.php");
+        header("Location: ./index.php?valid=update");
         exit;
     }
 }

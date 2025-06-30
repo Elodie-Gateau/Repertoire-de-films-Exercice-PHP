@@ -24,7 +24,7 @@
                     <td><span class="genre-item"><?= $genre['nom'] ?></span></td>
                     <td>
                         <div class="genres-actions"><a class="genre-item" href="modifier-genres.php?id=<?= $genre['id'] ?>">Modifier</a>
-                            <a class="genre-item delete" href="supprimer-genres.php?id=<?= $genre['id'] ?>">❌</a>
+                            <a class="genre-item delete" href="supprimer-genres.php?id=<?= $genre['id'] ?>" onclick="return confirm('Supprimer ce genre ?')">❌</a>
                         </div>
                     </td>
                 </tr>

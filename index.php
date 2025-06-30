@@ -12,8 +12,19 @@ if (isset($_GET['page']) && ctype_digit($_GET['page'])) {
 $offset = ($page - 1) * 5;
 ?>
 
+<?php
+$valid = "";
+if (isset($_GET['valid'])) {
+    $valid = htmlspecialchars($_GET['valid']);
+    $messageAdd = "Le film est ajouté à la liste.";
+    $messageUpdate = "Le film a été modifié.";
+}
+
+?>
+
 
 <h1>Répertoire de Films</h1>
+
 <div class="add">
     <a href="ajouter.php">✚ Ajouter un film</a>
 </div>
@@ -110,5 +121,10 @@ $offset = ($page - 1) * 5;
     ?>
 
 </div>
+<div class="confirm"><?php if ($valid === "add") {
+                            echo $messageAdd;
+                        } else if ($valid === "update") {
+                            echo $messageUpdate;
+                        } ?></div>
 
 <?php include 'includes/footer.php'; ?>

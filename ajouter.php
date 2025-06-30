@@ -7,9 +7,9 @@ $stmtGenre = $pdo->prepare($sqlGenre);
 $stmtGenre->execute();
 $genres = $stmtGenre->fetchAll(PDO::FETCH_ASSOC);
 
-
+$errors = [];
 if (isset($_POST) && !empty($_POST)) {
-    $errors = [];
+
 
 
     // Validation de l'année
@@ -70,16 +70,17 @@ if (isset($_POST) && !empty($_POST)) {
             'summary' => $_POST['summary']
         ]);
 
-        header('Location: ./index.php');
+        header('Location: ./index.php?valid=add');
         exit;
     } else {
-        echo "<pre>" . print_r($errors) . "</pre>";
+        array_unshift($errors, "Une erreur est survenue, le film n'est pas ajouté.");
     }
 }
 
-
 ?>
+
 <h1>Ajouter un film</h1>
+<div class="confirm"></div>
 <div class="add-form">
     <form action="ajouter.php" method="POST">
         <div class="form__questions">
@@ -117,5 +118,13 @@ if (isset($_POST) && !empty($_POST)) {
 
     </form>
 
+</div>
+<div class="error">
+    <ul><?php if (!empty($errors)) {
+            foreach ($errors as $error) { ?>
+                <li><?= $error ?></li>
+        <?php }
+        } ?>
+    </ul>
 </div>
 <?php include 'includes/footer.php'; ?>
