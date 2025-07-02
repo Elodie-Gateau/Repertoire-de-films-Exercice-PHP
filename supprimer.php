@@ -8,7 +8,7 @@ if (isset($_GET['id'])) {
     $stmt->execute([
         'id' => $id
     ]);
-    header("Location: ./index.php");
+    header("Location: ./index.php?valid=delete");
     exit;
 }
 ?>

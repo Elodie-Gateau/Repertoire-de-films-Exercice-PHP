@@ -18,6 +18,7 @@ if (isset($_GET['valid'])) {
     $valid = htmlspecialchars($_GET['valid']);
     $messageAdd = "Le film est ajouté à la liste.";
     $messageUpdate = "Le film a été modifié.";
+    $messageDelete = "Le film a été supprimé.";
 }
 
 ?>
@@ -121,10 +122,13 @@ if (isset($_GET['valid'])) {
     ?>
 
 </div>
-<div class="confirm"><?php if ($valid === "add") {
-                            echo $messageAdd;
-                        } else if ($valid === "update") {
-                            echo $messageUpdate;
-                        } ?></div>
+<div class="confirm">
+    <?php if ($valid === "add") {
+        echo $messageAdd;
+    } else if ($valid === "update") {
+        echo $messageUpdate;
+    } else if ($valid === "delete") {
+        echo $messageDelete;
+    } ?></div>
 
 <?php include 'includes/footer.php'; ?>

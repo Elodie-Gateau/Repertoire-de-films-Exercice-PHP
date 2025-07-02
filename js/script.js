@@ -1,5 +1,5 @@
 const confirmMessage = document.querySelector('.confirm');
-
+console.log(confirmMessage);
 if (confirmMessage.textContent !== '') {
   confirmMessage.classList.add('message');
   setTimeout(() => {

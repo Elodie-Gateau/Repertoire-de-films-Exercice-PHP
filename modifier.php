@@ -2,9 +2,9 @@
 <?php include 'includes/header.php'; ?>
 <?php
 
-
+$errors = [];
 if (isset($_POST['update'])) {
-    $errors = [];
+
 
 
     // Validation de l'année
@@ -65,6 +65,8 @@ if (isset($_POST['update'])) {
         ]);
         header("Location: ./index.php?valid=update");
         exit;
+    } else {
+        array_unshift($errors, "Une erreur est survenue, le film n'est pas modifié.");
     }
 }
 
@@ -151,5 +153,13 @@ if (!empty($errors)) {
         <input type="submit" name="update" value="Modifier">
 
     </form>
+</div>
+<div class="error">
+    <ul><?php if (!empty($errors)) {
+            foreach ($errors as $error) { ?>
+                <li><?= $error ?></li>
+        <?php }
+        } ?>
+    </ul>
 </div>
 <?php include 'includes/footer.php'; ?>
