@@ -144,12 +144,6 @@ CREATE TABLE films (
 
 ---
 
-## 🎨 UI/UX rapide
-
-- **CSS** : navigation, tableaux, formulaires, messages de confirmation (`.confirm`) avec animations `@keyframes fadeIn/fadeOut`.  
-- **JS** : gestion de l’affichage/masquage des messages (timeout 5s) et stylage des erreurs.
-
----
 
 ## ✅ Alignement avec le référentiel TP DWWM
 
